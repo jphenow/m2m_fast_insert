@@ -1,0 +1,5 @@
+require 'active_record'
+require 'active_support/all'
+require 'm2m_fast_insert/base'
+require 'm2m_fast_insert/version'
+require 'm2m_fast_insert/has_and_belongs_to_many_override'
