@@ -2,17 +2,21 @@ ActiveRecord::Schema.define do
   create_table :users, :force => true do |t|
     t.string :name
   end
-  create_table :posts_users, :id => false :force => true do |t|
+
+  create_table :posts_users, :id => false, :force => true do |t|
     t.references :user, :null => false
     t.references :post, :null => false
   end
+
   create_table :posts, :force => true do |t|
     t.string :content
   end
+
   create_table :connections, :force => true do |t|
     t.references :user
     t.references :friend
   end
+
   create_table :friends, :force => true do |t|
     t.string :type
   end
