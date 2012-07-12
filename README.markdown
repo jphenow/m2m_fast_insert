@@ -3,4 +3,30 @@
 [![TravisCI](https://secure.travis-ci.org/jphenow/m2m_fast_insert.png "TravisCI")](http://travis-ci.org/jphenow/m2m_fast_insert "Travis-CI M2MFastInsert")
 [Ruby Gems](https://rubygems.org/gems/m2m_fast_insert)
 
+# Why
+
+When doing a mass ID insert on a simple HABTM join table, Rails will load the entire records of all the IDs
+you're inserting. That seemed silly to me, since that's not running validations. Its also disgustingly slow
+if you're inserting, say, 10,000 records.
+
+This Gem solves that issue for now. I didn't want to override the insertion method, so I added
+`#fast_<relation_name>_ids_insert` to force a bare SQL call that just drops all of the IDs in without all
+of the overhead of loading their objects.
+
+# Usage
+
+```ruby
+class User < ActiveRecord::Base
+  has_and_belongs_to_many :posts
+  
+  def self.first_and_insert
+    User.first.fast_post_ids_insert [1,2,3,4,5,6,7,8,9,10]
+  end
+  
+  def insert_lots_of_posts
+    fast_post_ids_insert [1,2,3,4,5,6,7,8,9,10] # This is the actual call
+  end
+end
+```
+
 This project rocks and uses MIT-LICENSE.
