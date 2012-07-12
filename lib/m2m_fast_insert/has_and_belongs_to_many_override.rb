@@ -28,18 +28,9 @@ module M2MFastInsert
       join_table = options[:join_table]
       join_column_name = name.to_s.downcase.singularize
       define_method "fast_#{join_column_name}_ids_insert" do |*args|
-        ids = args[0]
-        options = args[1]
-        raise TypeError, "IDs must be fixnums" if ids.any? { |i| !i.is_a? Fixnum }
-        options ||= {} # Don't think we can use defaults for define_method
-        ids.uniq if options[:unique]
         table_name = self.class.table_name.singularize
-        inserts = []
-        ids.each do |given_id|
-          inserts << "(#{id}, #{given_id})"
-        end
-        sql = "INSERT INTO #{join_table} (`#{table_name}_id`, `#{join_column_name}_id`) VALUES #{inserts.join(", ")}"
-        ActiveRecord::Base.connection.execute sql
+        insert = M2MFastInsert::Base.new id, join_column_name, table_name, join_table, *args
+        insert.fast_insert
       end
     end
   end
