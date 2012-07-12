@@ -1,7 +1,8 @@
 module M2MFastInsert
   module HasAndBelongsToManyOverride
-    def self.included(klass)
-      klass.class_eval do
+    extend ActiveSupport::Concern
+    included do
+      class_eval do
         # Create Method chain if habtm is defined - This is because it goes down to AR::Base
         # and errors because at the time of inclusion, there is none defined
         alias_method_chain :has_and_belongs_to_many, :fast_inserts if self.method_defined? :has_and_belongs_to_many
@@ -26,7 +27,9 @@ module M2MFastInsert
     def define_fast_methods_for_model(name, options)
       join_table = options[:join_table]
       join_column_name = name.to_s.downcase.singularize
-      define_method "fast_#{join_column_name}_ids_insert" do |ids, options|
+      define_method "fast_#{join_column_name}_ids_insert" do |*args|
+        ids = args[0]
+        options = args[1]
         raise TypeError, "IDs must be fixnums" if ids.any? { |i| !i.is_a? Fixnum }
         options ||= {} # Don't think we can use defaults for define_method
         ids.uniq if options[:unique]
