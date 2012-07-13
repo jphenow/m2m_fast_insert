@@ -19,11 +19,11 @@ of the overhead of loading their objects.
 class User < ActiveRecord::Base
   has_and_belongs_to_many :posts
   
-  def self.first_and_insert
-    User.first.fast_post_ids_insert [1,2,3,4,5,6,7,8,9,10]
+  def self.first_and_insert # as an example
+    User.first.fast_post_ids_insert [1,2,3,4,5,6,7,8,9,10] # This is the actual call
   end
   
-  def insert_lots_of_posts
+  def insert_lots_of_posts # as an example
     fast_post_ids_insert [1,2,3,4,5,6,7,8,9,10] # This is the actual call
   end
 end
