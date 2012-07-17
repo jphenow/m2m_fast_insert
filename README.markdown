@@ -30,3 +30,8 @@ end
 ```
 
 This project rocks and uses MIT-LICENSE.
+
+# TODO
+
+* Allow options for how hard to fail with missing ID or ID params
+* Fall back to the rails-y insert on an empty ID?
