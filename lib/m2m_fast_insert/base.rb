@@ -3,10 +3,11 @@ module M2MFastInsert
     attr_reader :ids, :options, :id, :join_table, :join_column_name, :table_name
 
     def initialize(id, join_column_name, table_name, join_table, *args)
-      @ids = args[0].collect(&:to_i)
       @options = args[1].present? ? args[1] : {}
+      @id = id.to_i
+      @ids = args[0].collect(&:to_i)
       @ids.uniq! if options[:unique]
-      @id = id
+      raise ArgumentError, "Can't have nil ID, perhaps you didn't save the record first?" if id.nil?
       @join_table = join_table
       @join_column_name = join_column_name
       @table_name = table_name
@@ -26,7 +27,7 @@ module M2MFastInsert
     end
 
     def fast_insert
-      ActiveRecord::Base.connection.execute sql
+      ActiveRecord::Base.connection.execute(sql) unless ids.empty?
     end
   end
 end

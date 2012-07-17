@@ -38,6 +38,20 @@ module M2MFastInsert
     end
 
     describe "basic init" do
+      let(:ids) { [1,2] }
+      it "raises error on an empty ID" do
+        expect {
+          Base.new(nil, join_column_name, table_name, join_table, ids)
+        }.to raise_error(ArgumentError)
+      end
+
+      it "doesn't execute with an empty id list" do
+        ActiveRecord::Base.connection.should_not_receive(:execute)
+        Base.new(id, join_column_name, table_name, join_table, []).fast_insert
+      end
+    end
+
+    describe "basic init" do
       let(:ids) { [1,2,Base] }
       it "denies non-fixnum ids" do
         expect {
