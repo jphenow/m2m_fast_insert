@@ -38,11 +38,11 @@ module M2MFastInsert
     end
 
     describe "basic init" do
-      let(:ids) { ['1',2,3] }
+      let(:ids) { [1,2,Base] }
       it "denies non-fixnum ids" do
         expect {
           Base.new(id, join_column_name, table_name, join_table, ids)
-        }.to raise_error(TypeError, 'IDs must be fixnums')
+        }.to raise_error(NoMethodError)
       end
     end
   end

@@ -3,8 +3,7 @@ module M2MFastInsert
     attr_reader :ids, :options, :id, :join_table, :join_column_name, :table_name
 
     def initialize(id, join_column_name, table_name, join_table, *args)
-      @ids = args[0]
-      raise TypeError, "IDs must be fixnums" if ids.any? { |i| !i.is_a? Fixnum }
+      @ids = args[0].collect(&:to_i)
       @options = args[1].present? ? args[1] : {}
       @ids.uniq! if options[:unique]
       @id = id
