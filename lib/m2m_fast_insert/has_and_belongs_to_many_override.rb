@@ -31,6 +31,7 @@ module M2MFastInsert
         table_name = self.class.table_name.singularize
         insert = M2MFastInsert::Base.new id, join_column_name, table_name, join_table, *args
         insert.fast_insert
+        send(join_column_name.pluralize).send :reload
       end
     end
   end
