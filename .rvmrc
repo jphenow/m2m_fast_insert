@@ -1,4 +1,4 @@
-rvm --create ruby-1.9.3-p125@m2m_fast_insert
+rvm --create ruby-1.9.3-p448@m2m_fast_insert
 # Ensure that Bundler is installed, install it if it is not.
 if ! command -v bundle > /dev/null; then
   gem install bundler
