@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.homepage    = ""
   s.summary     = %q{Fast Inserts for Rails Many to Many relations}
   s.description = %q{}
+  s.license     = "MIT"
 
   s.rubyforge_project = "m2m_fast_insert"
 
