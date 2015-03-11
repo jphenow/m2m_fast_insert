@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 RSpec.configure do |config|
   config.requires = %w[m2m_fast_insert sqlite3]
 

@@ -35,4 +35,4 @@ module M2MFastInsert
     end
   end
 end
-ActiveRecord::AutosaveAssociation::ClassMethods.send :include, M2MFastInsert::HasAndBelongsToManyOverride
+ActiveRecord::Associations::ClassMethods.send :include, M2MFastInsert::HasAndBelongsToManyOverride
