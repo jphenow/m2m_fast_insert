@@ -39,6 +39,7 @@ GEM
     arel (3.0.2)
     builder (3.0.4)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     erubis (2.7.0)
     hike (1.2.3)
     i18n (0.6.5)
@@ -86,6 +87,11 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    simplecov (0.9.1)
+      docile (~> 1.1.0)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -106,4 +112,5 @@ DEPENDENCIES
   m2m_fast_insert!
   rake
   rspec-rails
+  simplecov
   sqlite3
